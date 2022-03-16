@@ -1,24 +1,13 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
 from .models import PostList
 from .serializers import PostListSerializer
-from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateDestroyAPIView
 
 
-# Create your views here.
+class PostCreate(ListCreateAPIView):
+    queryset = PostList.objects.all()
+    serializer_class = PostListSerializer
 
 
-class PostListView(APIView):
-
-    def get(self, request):
-        queryset = PostList.objects.all()
-        serializer = PostListSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = PostListSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class PostDetail(RetrieveUpdateDestroyAPIView):
+    queryset = PostList.objects.all()
+    serializer_class = PostListSerializer

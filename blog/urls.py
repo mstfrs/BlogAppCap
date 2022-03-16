@@ -1,10 +1,11 @@
 from django.urls import path, include
-from .views import PostListView
+from .views import PostList, PostDetail, PostCreate
 
 
 urlpatterns = [
 
-    # path('auth/', include('dj_rest_auth.urls')),
-    path('', PostListView.as_view()),
+
+    path('list/', PostCreate.as_view(), name="postlist"),
+    path('list/<int:pk>/', PostDetail.as_view(), name="postdetail")
 
 ]
