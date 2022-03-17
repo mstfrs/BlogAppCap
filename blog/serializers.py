@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comments, PostList
+from .models import Comments, Likes, PostList
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -18,6 +18,22 @@ class CommentSerializer(serializers.ModelSerializer):
         comment = Comments.objects.create(**validated_data)
         comment.save()
         return comment
+    
+    
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Likes
+        fields = (
+            "id",
+            "post",
+            "name",
+            "created",            
+        )
+
+    def create(self, validated_data):
+        likes = Likes.objects.create(**validated_data)
+        likes.save()
+        return likes
 
 
 class PostListSerializer(serializers.ModelSerializer):

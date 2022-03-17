@@ -42,7 +42,7 @@ class Comments(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return 'Comment by {} on {}'.format(self.name, self.post)
+        return 'Comment by {} on {}'.format(self.user, self.post)
 
 
 class Likes(models.Model):
@@ -55,5 +55,5 @@ class Likes(models.Model):
     class Meta:
         ordering = ('created',)
 
-    # def __str__(self):
-    #     return self.name
+    def __str__(self):
+        return self.name

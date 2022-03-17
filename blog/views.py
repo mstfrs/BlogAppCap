@@ -1,7 +1,6 @@
-from .models import PostList
-from .serializers import PostListSerializer
-from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateDestroyAPIView
-
+from .models import Comments, Likes, PostList
+from .serializers import PostListSerializer, CommentSerializer,LikeSerializer
+from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateDestroyAPIView 
 
 class PostCreate(ListCreateAPIView):
     queryset = PostList.objects.all()
@@ -11,3 +10,12 @@ class PostCreate(ListCreateAPIView):
 class PostDetail(RetrieveUpdateDestroyAPIView):
     queryset = PostList.objects.all()
     serializer_class = PostListSerializer
+    
+    
+class CommentDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Comments.objects.all()
+    serializer_class = CommentSerializer
+    
+class LikeDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Likes.objects.all()
+    serializer_class = LikeSerializer
